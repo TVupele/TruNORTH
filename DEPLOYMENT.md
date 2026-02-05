@@ -6,16 +6,9 @@ TruNORTH now supports **serverless API functions** directly on Vercel!
 
 ### Step 1: Push Code to GitHub
 ```bash
-# Initialize git if not already done
-git init
 git add .
 git commit -m "Prepare for Vercel deployment"
-
-# Create a new repository on GitHub.com
-# Then push your code:
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/TruNORTH.git
-git push -u origin main
+git push origin main
 ```
 
 ### Step 2: Deploy to Vercel
@@ -35,13 +28,19 @@ git push -u origin main
 
 Go to Project Settings → Environment Variables and add:
 
-| Variable | Value |
-|----------|-------|
-| `VITE_SUPABASE_URL` | `https://ikthjaibjralpqyjwktt.supabase.co` |
-| `VITE_SUPABASE_ANON_KEY` | `sb_publishable_eMfP92Pq5hA6Izm9ynQkWw_K7EuVAdx` |
-| `VITE_SUPABASE_PROJECT_ID` | `ikthjaibjralpqyjwktt` |
-| `VITE_DEMO_MODE` | `true` (set to `false` for production) |
-| `JWT_SECRET` | `your-super-secret-jwt-key` (change this!) |
+| Variable | Value | Source |
+|----------|-------|--------|
+| `VITE_SUPABASE_URL` | `https://ikthjaibjralpqyjwktt.supabase.co` | Supabase → Settings → API → URL |
+| `VITE_SUPABASE_ANON_KEY` | `sb_publishable_eMfP92Pq5hA6Izm9ynQkWw_K7EuVAdx` | Supabase → Settings → API → New publishable key |
+| `VITE_SUPABASE_PROJECT_ID` | `ikthjaibjralpqyjwktt` | Supabase → Settings → API → Project ID |
+| `JWT_SECRET` | `[YOUR JWT SECRET]` | Supabase → Settings → JWT Settings → JWT Secret |
+| `VITE_DEMO_MODE` | `true` | Set to `false` for production |
+
+**⚠️ Important: Get your JWT Secret from:**
+1. Go to Supabase Dashboard
+2. Click Settings (⚙️) → JWT Settings
+3. Copy the JWT Secret value
+4. Add it to Vercel as `JWT_SECRET`
 
 ### Step 4: Configure Custom Domain (Optional)
 1. Go to Vercel Dashboard → Your Project → Settings → Domains
@@ -80,21 +79,24 @@ https://your-project.vercel.app/api/
 
 ---
 
-## Environment Variables Reference
+## Understanding Your Supabase Keys
 
-### Frontend Variables (VITE_*)
-```
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
-VITE_SUPABASE_PROJECT_ID=your-project-id
-VITE_DEMO_MODE=true  # or false for production
-```
+### Which Key Goes Where?
 
-### Serverless API Variables
-```
-JWT_SECRET=your-super-secret-jwt-key
-OPENAI_API_KEY=your-openai-api-key (optional)
-```
+| Key | Format | Use For |
+|-----|--------|---------|
+| **Publishable Key** | `sb_publishable_...` | Frontend (VITE_SUPABASE_ANON_KEY) - Safe in browser |
+| **Secret Key** | `sb_secret_...` | Server-side only (backend/admin operations) |
+| **JWT Secret** | UUID format | API authentication (JWT_SECRET) |
+| **Legacy Anon Key** | `eyJhbGciOiJIUz...` | Old format - prefer publishable key |
+
+### Where to Find Each Key
+
+1. **Publishable Key**: Supabase → Settings → API → New publishable key
+2. **Secret Key**: Supabase → Settings → API → New secret key
+3. **JWT Secret**: Supabase → Settings → JWT Settings → JWT Secret
+4. **Project URL**: Supabase → Settings → API → Project URL
+5. **Project ID**: Supabase → Settings → API → Project ID
 
 ---
 
@@ -153,7 +155,7 @@ To disable demo mode:
 - [ ] Code pushed to GitHub
 - [ ] Vercel account created
 - [ ] Project connected to Vercel
-- [ ] Environment variables added
+- [ ] Environment variables added (including JWT_SECRET!)
 - [ ] Build successful on Vercel
 - [ ] API endpoints tested
 - [ ] Supabase CORS updated (if needed)
