@@ -10,9 +10,9 @@
     }
   ],
   "env": {
-    "VITE_SUPABASE_URL": "@supabase_url",
-    "VITE_SUPABASE_ANON_KEY": "@supabase_anon_key",
-    "VITE_SUPABASE_PROJECT_ID": "@supabase_project_id",
+    "VITE_SUPABASE_URL": "https://ikthjaibjralpqyjwktt.supabase.co",
+    "VITE_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrdGhqYWlianJhbHBxeWp3a3R0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MzcwNzMsImV4cCI6MjA4NTIxMzA3M30.vPiGpoJDv4D8iS85ss_TXlrQNLBvC3CpvfLTqorsibc",
+    "VITE_SUPABASE_PROJECT_ID": "ikthjaibjralpqyjwktt",
     "VITE_DEMO_MODE": "true"
   },
   "functions": {
